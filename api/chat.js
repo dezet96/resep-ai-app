@@ -4,16 +4,27 @@ export default async function handler(req, res) {
     }
 
     const API_KEY = process.env.OPENROUTER_API_KEY;
-    
-    // Cek API key
-    console.log('API Key ada?', !!API_KEY);
-    console.log('Panjang key:', API_KEY?.length);
-    console.log('Awalan key:', API_KEY?.substring(0, 15));
 
-    // Return dulu untuk cek
-    return res.status(200).json({ 
-        keyExists: !!API_KEY,
-        keyLength: API_KEY?.length,
-        keyPrefix: API_KEY?.substring(0, 15)
-    });
+    if (!API_KEY) {
+        return res.status(500).json({ error: 'API key tidak ditemukan' });
+    }
+
+    try {
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`,
+                'HTTP-Referer': 'https://resep-ai-app.vercel.app',
+                'X-Title': 'ResepAI App'
+            },
+            body: JSON.stringify(req.body)
+        });
+
+        const data = await response.json();
+        return res.status(response.status).json(data);
+
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
 }
