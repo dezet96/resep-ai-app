@@ -1,7 +1,7 @@
 // ==========================================
 // KONFIGURASI OPENROUTER
 // ==========================================
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = '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';
 const OPENROUTER_URL = '/api/chat';
 
 const MODELS = [
