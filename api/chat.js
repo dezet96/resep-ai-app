@@ -10,7 +10,7 @@ export default async function handler(req, res) {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                'HTTP-Referer': req.headers.referer || 'https://resep-ai.vercel.app',
+                'HTTP-Referer': 'https://resep-ai-app.vercel.app',
                 'X-Title': 'ResepAI App'
             },
             body: JSON.stringify(req.body)
