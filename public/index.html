@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResepAI - Generator Resep Pintar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="header-icon">🍳</div>
+            <h1>ResepAI</h1>
+            <p>Masukkan bahan yang Anda punya, AI akan buatkan resepnya!</p>
+        </header>
+
+        <!-- ===== INPUT SECTION ===== -->
+        <section class="input-section">
+            <div class="input-group">
+                <label for="bahan">🥕 Bahan yang tersedia (pisahkan dengan koma):</label>
+                <textarea 
+                    id="bahan" 
+                    placeholder="Contoh: telur, tomat, bawang merah, cabai, nasi..."
+                    rows="3"
+                ></textarea>
+            </div>
+            
+            <button id="generateBtn" class="btn-primary">
+                ✨ Generate Resep
+            </button>
+
+            <!-- Loading -->
+            <div id="loadingSpinner" class="hidden">
+                <div class="spinner"></div>
+                <p>Sedang membuat resep untukmu...</p>
+            </div>
+            
+            <!-- Error
+            <div id="errorMessage" class="error-message hidden"></div> -->
+        </section>
+
+        <!-- ===== MAIN CONTENT (2 KOLOM) ===== -->
+        <!-- MAIN CONTENT: 2 KOLOM -->
+        <div class="main-content">
+
+            <!-- KOLOM KIRI -->
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <h3>🕐 Riwayat Pencarian</h3>
+                        <button id="clearHistoryBtn" class="btn-clear">Hapus</button>
+                    </div>
+                    <div id="historyList">
+                        <p class="empty-text">Belum ada riwayat pencarian</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <h3>💾 Resep Tersimpan</h3>
+                    </div>
+                    <div id="resepTersimpanList">
+                        <p class="empty-text">Belum ada resep tersimpan</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- KOLOM KANAN -->
+            <main class="main-hasil">
+                <section id="hasilSection" class="hasil-section hidden">
+                    <h2>🍽️ Resep yang Bisa Dibuat</h2>
+                    <div id="resepContainer"></div>
+                </section>
+
+                <div id="placeholderSection" class="placeholder-section">
+                    <div class="placeholder-icon">👨‍🍳</div>
+                    <h3>Siap Memasak?</h3>
+                    <p>Masukkan bahan yang kamu punya, lalu klik <strong>Generate Resep!</strong></p>
+                </div>
+            </main>
+
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <p>Powered by <strong>OpenRouter AI</strong> | Dibuat dengan ❤️</p>
+        </footer>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
