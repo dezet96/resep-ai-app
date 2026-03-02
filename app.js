@@ -1,13 +1,13 @@
 // ==========================================
 // KONFIGURASI OPENROUTER
 // ==========================================
-const OPENROUTER_API_KEY = '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';
+
 const OPENROUTER_URL = '/api/chat';
 
 const MODELS = [
     'meta-llama/llama-3.3-70b-instruct:free',
     'google/gemma-3-27b-it:free',
-    'openai/gpt-oss-20b:free'
+    'mistralai/mistral-7b-instruct:free'
 ];
 
 let currentModelIndex = 0;
@@ -129,15 +129,26 @@ async function callOpenRouterAPI(prompt, retryCount = 0) {
 
     currentModelIndex = 0;
     const data = await response.json();
-
-    // Tambahkan ini!
+    
     console.log('Full response data:', JSON.stringify(data));
 
-    if (!data.choices || !data.choices[0]) {
-        throw new Error(data.error?.message || 'Response tidak valid: ' + JSON.stringify(data));
+    // ✅ Cek error dari OpenRouter
+    if (data.error) {
+        throw new Error(data.error.message || 'OpenRouter error');
+    }
+
+    // ✅ Cek choices ada
+    if (!data.choices || data.choices.length === 0) {
+        throw new Error('Tidak ada response: ' + JSON.stringify(data));
+    }
+
+    // ✅ Cek message content ada
+    if (!data.choices[0].message || !data.choices[0].message.content) {
+        throw new Error('Content kosong: ' + JSON.stringify(data.choices[0]));
     }
 
     return data.choices[0].message.content;
+
 }
 
 // ==========================================
