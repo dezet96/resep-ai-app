@@ -3,11 +3,20 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    // SEMENTARA untuk test - hapus setelah berhasil!
     const API_KEY = process.env.OPENROUTER_API_KEY;
-    console.log('Full API Key:', API_KEY); // lihat full key di log
 
     try {
+        // HARDCODE dulu untuk test
+        const testBody = {
+            model: "mistralai/mistral-7b-instruct:free", // ganti model!
+            messages: [
+                {
+                    role: "user",
+                    content: "Halo, apa kabar?"
+                }
+            ]
+        };
+
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -16,7 +25,7 @@ export default async function handler(req, res) {
                 'HTTP-Referer': 'https://resep-ai-app.vercel.app',
                 'X-Title': 'ResepAI App'
             },
-            body: JSON.stringify(req.body)
+            body: JSON.stringify(testBody)
         });
 
         const data = await response.json();
@@ -24,6 +33,7 @@ export default async function handler(req, res) {
         res.status(response.status).json(data);
 
     } catch (error) {
+        console.log('Catch error:', error.message);
         res.status(500).json({ error: error.message });
     }
 }
