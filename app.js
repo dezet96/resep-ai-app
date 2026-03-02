@@ -129,6 +129,14 @@ async function callOpenRouterAPI(prompt, retryCount = 0) {
 
     currentModelIndex = 0;
     const data = await response.json();
+
+    // Tambahkan ini!
+    console.log('Full response data:', JSON.stringify(data));
+
+    if (!data.choices || !data.choices[0]) {
+        throw new Error(data.error?.message || 'Response tidak valid: ' + JSON.stringify(data));
+    }
+
     return data.choices[0].message.content;
 }
 
