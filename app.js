@@ -5,9 +5,10 @@
 const OPENROUTER_URL = '/api/chat';
 
 const MODELS = [
-    'meta-llama/llama-3.3-70b-instruct:free',
-    'google/gemma-3-27b-it:free',
-    'mistralai/mistral-7b-instruct:free'
+    'mistralai/mistral-7b-instruct:free',
+    'google/gemma-2-9b-it:free', 
+    'meta-llama/llama-3.2-3b-instruct:free',
+    'qwen/qwen-2-7b-instruct:free'
 ];
 
 let currentModelIndex = 0;
