@@ -474,7 +474,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const generateBtn = document.getElementById('generateBtn');
     if (generateBtn) {
-        generateBtn.addEventListener('click', generateResep);
+        generateBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // ← Tambah ini!
+            generateResep();
+        });
     }
 
     const bahanInput = document.getElementById('bahan');
