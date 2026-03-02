@@ -5,10 +5,13 @@
 const OPENROUTER_URL = '/api/chat';
 
 const MODELS = [
-    'mistralai/mistral-7b-instruct:free',
-    'google/gemma-2-9b-it:free', 
-    'meta-llama/llama-3.2-3b-instruct:free',
-    'qwen/qwen-2-7b-instruct:free'
+  'meta-llama/llama-4-maverick:free',
+  'meta-llama/llama-4-scout:free',
+  'openai/gpt-oss-20b:free',
+  'moonshotai/kimi-vl-a3b-thinking:free',
+  'google/gemma-2-9b-it:free',
+  'qwen/qwen-2-7b-instruct:free',
+  'microsoft/phi-3-mini-128k-instruct:free'
 ];
 
 let currentModelIndex = 0;
@@ -523,4 +526,5 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
 
 window.addEventListener('unhandledrejection', function (event) {
     console.error('Unhandled promise rejection:', event.reason);
+
 });
